@@ -15,15 +15,19 @@ const NAV = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const location = useLocation()
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 50)
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
     window.addEventListener('scroll', fn)
-    return () => window.removeEventListener('scroll', fn)
+    window.addEventListener('resize', checkMobile)
+    checkMobile()
+    return () => { window.removeEventListener('scroll', fn); window.removeEventListener('resize', checkMobile) }
   }, [])
 
-  useEffect(() => { window.scrollTo(0, 0) }, [location.pathname])
+  useEffect(() => { window.scrollTo(0, 0); setOpen(false) }, [location.pathname])
 
   return (
     <>
@@ -31,57 +35,79 @@ export default function Navbar() {
         initial={{ y: -80 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
-          scrolled ? 'glass-strong shadow-lg shadow-black/20' : 'bg-transparent'
-        }`}
+        style={{
+          position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+          transition: 'all .3s',
+          background: scrolled ? 'rgba(255,255,255,.06)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(30px)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(30px)' : 'none',
+          borderBottom: scrolled ? '1px solid rgba(255,255,255,.1)' : '1px solid transparent',
+        }}
       >
         <div className="section-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 64 }}>
-          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 10, fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 700, color: '#fff', textDecoration: 'none' }}>
+          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 10, fontFamily: "'Space Grotesk', sans-serif", fontSize: 18, fontWeight: 700, color: '#fff', textDecoration: 'none', whiteSpace: 'nowrap' }}>
             <Rocket style={{ width: 20, height: 20, color: '#a78bfa' }} />
             K11 SOLUTIONS
           </Link>
 
-          <ul style={{ display: 'flex', alignItems: 'center', gap: 32, listStyle: 'none', margin: 0, padding: 0 }} className="hidden md:flex">
-            {NAV.map(n => (
-              <li key={n.to}>
-                <Link to={n.to} style={{
-                  fontSize: 14, fontWeight: 500, textDecoration: 'none', transition: 'color .3s',
-                  color: location.pathname === n.to ? '#a78bfa' : '#94a3b8',
-                }}
-                  onMouseEnter={e => e.currentTarget.style.color = '#fff'}
-                  onMouseLeave={e => e.currentTarget.style.color = location.pathname === n.to ? '#a78bfa' : '#94a3b8'}
-                >
-                  {n.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          {/* Desktop nav */}
+          {!isMobile && (
+            <ul style={{ display: 'flex', alignItems: 'center', gap: 32, listStyle: 'none', margin: 0, padding: 0 }}>
+              {NAV.map(n => (
+                <li key={n.to}>
+                  <Link to={n.to} style={{
+                    fontSize: 14, fontWeight: 500, textDecoration: 'none', transition: 'color .3s',
+                    color: location.pathname === n.to ? '#a78bfa' : '#94a3b8',
+                  }}>{n.label}</Link>
+                </li>
+              ))}
+            </ul>
+          )}
 
-          <div className="hidden md:flex" style={{ alignItems: 'center', gap: 12 }}>
+          {/* Desktop CTA */}
+          {!isMobile && (
             <Link to="/contact" className="btn-primary" style={{ fontSize: 14, padding: '10px 24px', minHeight: 44 }}>Start Project</Link>
-          </div>
+          )}
 
-          <button className="md:hidden" style={{ color: '#fff', background: 'none', border: 'none', cursor: 'pointer' }} onClick={() => setOpen(!open)}>
-            {open ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          {/* Mobile hamburger */}
+          {isMobile && (
+            <button onClick={() => setOpen(!open)} style={{
+              color: '#fff', background: 'none', border: 'none', cursor: 'pointer',
+              width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center',
+              WebkitTapHighlightColor: 'transparent',
+            }}>
+              {open ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          )}
         </div>
       </motion.nav>
 
+      {/* Mobile menu */}
       <AnimatePresence>
-        {open && (
+        {open && isMobile && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="glass-strong md:hidden"
-            style={{ position: 'fixed', left: 0, right: 0, top: 64, zIndex: 99, padding: 24 }}
+            style={{
+              position: 'fixed', left: 0, right: 0, top: 64, bottom: 0, zIndex: 99,
+              background: 'rgba(2,6,23,.97)', backdropFilter: 'blur(30px)', WebkitBackdropFilter: 'blur(30px)',
+              padding: '16px 24px', overflowY: 'auto',
+            }}
           >
             {NAV.map(n => (
               <Link key={n.to} to={n.to} onClick={() => setOpen(false)}
-                style={{ display: 'block', padding: '16px 0', color: location.pathname === n.to ? '#a78bfa' : '#cbd5e1', fontWeight: 500, fontSize: 16, borderBottom: '1px solid rgba(255,255,255,.05)', textDecoration: 'none', WebkitTapHighlightColor: 'transparent' }}
+                style={{
+                  display: 'flex', alignItems: 'center', padding: '18px 0', fontSize: 18, fontWeight: 500,
+                  color: location.pathname === n.to ? '#a78bfa' : '#cbd5e1',
+                  borderBottom: '1px solid rgba(255,255,255,.05)', textDecoration: 'none',
+                  WebkitTapHighlightColor: 'transparent',
+                }}
               >{n.label}</Link>
             ))}
-            <Link to="/contact" onClick={() => setOpen(false)} className="btn-primary" style={{ marginTop: 16, width: '100%', justifyContent: 'center', padding: '12px', textDecoration: 'none' }}>Start Project</Link>
+            <Link to="/contact" onClick={() => setOpen(false)} className="btn-primary"
+              style={{ marginTop: 24, width: '100%', padding: '16px', fontSize: 16 }}
+            >Start Project</Link>
           </motion.div>
         )}
       </AnimatePresence>
