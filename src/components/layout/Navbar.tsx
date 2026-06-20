@@ -58,7 +58,7 @@ export default function Navbar() {
           </ul>
 
           <div className="hidden md:flex" style={{ alignItems: 'center', gap: 12 }}>
-            <Link to="/contact" className="btn-primary" style={{ fontSize: 14, padding: '10px 24px' }}>Start Project</Link>
+            <Link to="/contact" className="btn-primary" style={{ fontSize: 14, padding: '10px 24px', minHeight: 44 }}>Start Project</Link>
           </div>
 
           <button className="md:hidden" style={{ color: '#fff', background: 'none', border: 'none', cursor: 'pointer' }} onClick={() => setOpen(!open)}>
@@ -78,7 +78,7 @@ export default function Navbar() {
           >
             {NAV.map(n => (
               <Link key={n.to} to={n.to} onClick={() => setOpen(false)}
-                style={{ display: 'block', padding: '12px 0', color: location.pathname === n.to ? '#a78bfa' : '#cbd5e1', fontWeight: 500, borderBottom: '1px solid rgba(255,255,255,.05)', textDecoration: 'none' }}
+                style={{ display: 'block', padding: '16px 0', color: location.pathname === n.to ? '#a78bfa' : '#cbd5e1', fontWeight: 500, fontSize: 16, borderBottom: '1px solid rgba(255,255,255,.05)', textDecoration: 'none', WebkitTapHighlightColor: 'transparent' }}
               >{n.label}</Link>
             ))}
             <Link to="/contact" onClick={() => setOpen(false)} className="btn-primary" style={{ marginTop: 16, width: '100%', justifyContent: 'center', padding: '12px', textDecoration: 'none' }}>Start Project</Link>

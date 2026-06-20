@@ -50,7 +50,7 @@ export default function Testimonials() {
           </AnimatePresence>
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: 12, marginTop: 32, alignItems: 'center' }}>
-            <button onClick={prev} className="glass" style={{ width: 40, height: 40, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', cursor: 'pointer', border: 'none' }}>
+            <button onClick={prev} className="glass" style={{ width: 48, height: 48, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', cursor: 'pointer', border: 'none', WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}>
               <ChevronLeft size={18} />
             </button>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -58,7 +58,7 @@ export default function Testimonials() {
                 <button key={i} onClick={() => setCurrent(i)} style={{ width: i === current ? 24 : 8, height: 8, borderRadius: 4, background: i === current ? '#8b5cf6' : 'rgba(255,255,255,.2)', border: 'none', cursor: 'pointer', transition: 'all .3s' }} />
               ))}
             </div>
-            <button onClick={next} className="glass" style={{ width: 40, height: 40, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', cursor: 'pointer', border: 'none' }}>
+            <button onClick={next} className="glass" style={{ width: 48, height: 48, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', cursor: 'pointer', border: 'none', WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}>
               <ChevronRight size={18} />
             </button>
           </div>

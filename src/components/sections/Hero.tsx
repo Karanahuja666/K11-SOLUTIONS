@@ -73,10 +73,10 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.45 }}
           style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: 16 }}
         >
-          <Link to="/contact" className="btn-primary" style={{ fontSize: 16, padding: '14px 32px', textDecoration: 'none' }}>
+          <Link to="/contact" className="btn-primary hero-btn">
             Start Project <ArrowRight size={16} />
           </Link>
-          <Link to="/work" className="btn-ghost" style={{ fontSize: 16, padding: '14px 32px', textDecoration: 'none' }}>
+          <Link to="/work" className="btn-ghost hero-btn">
             <Play size={16} /> View Our Work
           </Link>
         </motion.div>

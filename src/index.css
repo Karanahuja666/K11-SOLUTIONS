@@ -45,23 +45,30 @@ body { font-family: var(--font-sans); background: #020617; color: #e2e8f0; overf
 .cosmic-bg { background: radial-gradient(ellipse at 20% 50%, rgba(139,92,246,.08) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(217,70,239,.06) 0%, transparent 40%), radial-gradient(ellipse at 50% 80%, rgba(6,182,212,.05) 0%, transparent 45%), #020617; }
 
 .btn-primary {
-  background: linear-gradient(135deg, #7c3aed, #8b5cf6); padding: 12px 32px; border-radius: 12px;
+  background: linear-gradient(135deg, #7c3aed, #8b5cf6); padding: 14px 32px; border-radius: 12px;
   font-weight: 600; font-size: 14px; font-family: 'Inter', sans-serif; transition: all .3s;
   box-shadow: 0 4px 20px rgba(124,58,237,.4); border: none; color: #fff; cursor: pointer;
   display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; line-height: 1.4;
+  -webkit-tap-highlight-color: transparent; touch-action: manipulation; user-select: none;
+  min-height: 48px; white-space: nowrap;
 }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(124,58,237,.6); }
+.btn-primary:active { transform: scale(.97); box-shadow: 0 2px 12px rgba(124,58,237,.4); }
 
 .btn-ghost {
-  background: none; border: 1px solid rgba(139,92,246,.3); padding: 12px 32px; border-radius: 12px;
+  background: none; border: 1px solid rgba(139,92,246,.3); padding: 14px 32px; border-radius: 12px;
   font-weight: 600; font-size: 14px; font-family: 'Inter', sans-serif; transition: all .3s;
   color: #c4b5fd; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; line-height: 1.4;
+  -webkit-tap-highlight-color: transparent; touch-action: manipulation; user-select: none;
+  min-height: 48px; white-space: nowrap;
 }
 .btn-ghost:hover { border-color: rgba(139,92,246,.6); background: rgba(139,92,246,.08); transform: translateY(-2px); }
+.btn-ghost:active { transform: scale(.97); background: rgba(139,92,246,.12); }
 
 .cosmic-card {
   background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.06); border-radius: 20px;
   backdrop-filter: blur(12px); transition: all .4s cubic-bezier(.4,0,.2,1);
+  -webkit-tap-highlight-color: transparent;
 }
 .cosmic-card:hover { border-color: rgba(139,92,246,.35); transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,.5), 0 0 40px rgba(139,92,246,.1); }
 
@@ -84,4 +91,34 @@ body { font-family: var(--font-sans); background: #020617; color: #e2e8f0; overf
   .grid-footer { grid-template-columns: 1fr; }
   .grid-form-row { grid-template-columns: 1fr; }
   .section-container { padding-left: 16px; padding-right: 16px; }
+
+  .btn-primary, .btn-ghost {
+    width: 100%; padding: 16px 24px; font-size: 15px; min-height: 52px; border-radius: 14px;
+  }
+
+  .cosmic-card { border-radius: 16px; }
+  .cosmic-card:hover { transform: none; box-shadow: none; }
+  .cosmic-card:active { border-color: rgba(139,92,246,.35); background: rgba(255,255,255,.04); }
+}
+
+@media (max-width: 480px) {
+  .section-container { padding-left: 12px; padding-right: 12px; }
+  .btn-primary, .btn-ghost { font-size: 14px; padding: 14px 20px; }
+}
+
+/* Hero buttons */
+.hero-btn { font-size: 16px; padding: 16px 36px; }
+@media (max-width: 768px) { .hero-btn { width: 100%; max-width: 320px; } }
+@media (max-width: 480px) { .hero-btn { max-width: 100%; font-size: 15px; padding: 14px 24px; } }
+
+/* iOS safe area */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  footer { padding-bottom: env(safe-area-inset-bottom); }
+}
+
+/* Disable hover effects on touch devices */
+@media (hover: none) {
+  .btn-primary:hover { transform: none; box-shadow: 0 4px 20px rgba(124,58,237,.4); }
+  .btn-ghost:hover { transform: none; background: none; border-color: rgba(139,92,246,.3); }
+  .cosmic-card:hover { transform: none; border-color: rgba(255,255,255,.06); box-shadow: none; }
 }

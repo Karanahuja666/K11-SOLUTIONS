@@ -58,7 +58,7 @@ export default function Contact() {
                 <label style={labelStyle}>Message *</label>
                 <textarea value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} rows={5} placeholder="Tell us about your project..." style={{ ...inputStyle, resize: 'none' }} onFocus={focusHandler} onBlur={blurHandler} />
               </div>
-              <button type="submit" disabled={sending} className="btn-primary" style={{ width: '100%', padding: 14 }}>
+              <button type="submit" disabled={sending} className="btn-primary" style={{ width: '100%', padding: 16, fontSize: 15 }}>
                 {sending ? 'Sending...' : <><Send size={16} /> Send Message</>}
               </button>
             </form>

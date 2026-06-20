@@ -38,7 +38,8 @@ export default function Portfolio() {
           {CATEGORIES.map(c => (
             <button key={c} onClick={() => setFilter(c)}
               style={{
-                padding: '8px 16px', borderRadius: 12, fontSize: 14, fontWeight: 500, cursor: 'pointer', fontFamily: 'Inter, sans-serif',
+                padding: '10px 18px', borderRadius: 12, fontSize: 14, fontWeight: 500, cursor: 'pointer', fontFamily: 'Inter, sans-serif',
+                minHeight: 44, WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' as const,
                 transition: 'all .3s', border: 'none',
                 background: filter === c ? 'rgba(139,92,246,.2)' : 'rgba(255,255,255,.03)',
                 color: filter === c ? '#c4b5fd' : '#64748b',
