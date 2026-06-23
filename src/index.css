@@ -73,6 +73,7 @@ body { font-family: var(--font-sans); background: #020617; color: #e2e8f0; overf
 .cosmic-card:hover { border-color: rgba(139,92,246,.35); transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,.5), 0 0 40px rgba(139,92,246,.1); }
 
 /* Responsive grids */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .grid-contact { display: grid; grid-template-columns: 3fr 2fr; gap: 32px; }
@@ -85,6 +86,7 @@ body { font-family: var(--font-sans); background: #020617; color: #e2e8f0; overf
   .grid-footer { grid-template-columns: repeat(2, 1fr); gap: 32px; }
 }
 @media (max-width: 768px) {
+  .grid-2 { grid-template-columns: 1fr; }
   .grid-4 { grid-template-columns: 1fr; }
   .grid-3 { grid-template-columns: 1fr; }
   .grid-contact { grid-template-columns: 1fr; }

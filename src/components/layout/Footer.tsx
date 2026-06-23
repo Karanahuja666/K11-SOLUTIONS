@@ -13,9 +13,9 @@ const SERVICES = [
 const COMPANY = [
   { label: 'About Us', to: '/about' },
   { label: 'Our Work', to: '/work' },
-  { label: 'Process', to: '/process' },
+  { label: 'Reviews', to: '/reviews' },
+  { label: 'Blog', to: '/blog' },
   { label: 'Contact', to: '/contact' },
-  { label: 'Admin', to: '/admin' },
 ]
 
 export default function Footer() {

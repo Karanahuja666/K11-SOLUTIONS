@@ -2,55 +2,59 @@ import { useState } from 'react'
 import { Rocket, Lock } from 'lucide-react'
 import toast from 'react-hot-toast'
 
+const ADMIN_EMAIL = 'karanahuja5894@gmail.com'
+const ADMIN_PASS = 'karanyo'
+
 interface Props { onLogin: () => void }
 
 export default function AdminLogin({ onLogin }: Props) {
-  const [user, setUser] = useState('')
+  const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
-    if (user === 'admin' && pass === 'k11admin') {
-      localStorage.setItem('k11_auth', 'true')
+    if (email === ADMIN_EMAIL && pass === ADMIN_PASS) {
+      localStorage.setItem('k11_admin_auth', 'true')
+      localStorage.setItem('k11_admin_session', Date.now().toString())
       onLogin()
       toast.success('Welcome back, Admin!')
     } else {
-      toast.error('Invalid credentials')
+      toast.error('Invalid email or password')
     }
   }
 
-  const inputClass = 'w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 outline-none focus:border-violet-500/50 transition-all'
+  const inputStyle: React.CSSProperties = {
+    width: '100%', background: 'rgba(255,255,255,.03)', border: '1px solid rgba(255,255,255,.08)',
+    borderRadius: 12, padding: '14px 16px', fontSize: 14, color: '#fff', outline: 'none',
+    fontFamily: 'Inter, sans-serif', transition: 'border-color .3s',
+  }
 
   return (
-    <div className="min-h-screen flex items-center justify-center cosmic-bg px-6">
-      <div className="absolute inset-0">
-        <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-violet-600/8 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/3 right-1/4 w-72 h-72 bg-fuchsia-600/6 rounded-full blur-[100px]" />
-      </div>
-
-      <div className="relative cosmic-card p-10 w-full max-w-md">
-        <div className="text-center mb-8">
-          <div className="w-14 h-14 rounded-2xl bg-violet-500/15 border border-violet-500/25 flex items-center justify-center mx-auto mb-4">
-            <Rocket className="text-violet-400" size={24} />
-          </div>
-          <h1 className="text-xl font-bold text-white font-[family-name:var(--font-display)]">K11 Admin</h1>
-          <p className="text-slate-500 text-sm mt-1">Sign in to manage your dashboard</p>
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#020617', padding: 24 }}>
+      <div className="cosmic-card" style={{ padding: 40, width: '100%', maxWidth: 420, textAlign: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, marginBottom: 8 }}>
+          <Rocket size={28} style={{ color: '#a78bfa' }} />
+          <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 22, fontWeight: 700, color: '#fff' }}>K11 SOLUTIONS</span>
+        </div>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '6px 14px', borderRadius: 20, background: 'rgba(139,92,246,.1)', border: '1px solid rgba(139,92,246,.2)', color: '#a78bfa', fontSize: 12, fontWeight: 500, marginBottom: 32 }}>
+          <Lock size={12} /> Admin Panel — Secure Access
         </div>
 
-        <form onSubmit={handleLogin} className="space-y-4">
-          <div>
-            <label className="block text-xs font-medium text-slate-400 mb-2 uppercase tracking-wider">Username</label>
-            <input type="text" value={user} onChange={e => setUser(e.target.value)} placeholder="admin" className={inputClass} />
+        <form onSubmit={handleLogin}>
+          <div style={{ marginBottom: 20, textAlign: 'left' }}>
+            <label style={{ display: 'block', fontSize: 12, fontWeight: 500, color: '#94a3b8', marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 }}>Email</label>
+            <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="admin@email.com" style={inputStyle}
+              onFocus={e => e.currentTarget.style.borderColor = 'rgba(139,92,246,.5)'} onBlur={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,.08)'} />
           </div>
-          <div>
-            <label className="block text-xs font-medium text-slate-400 mb-2 uppercase tracking-wider">Password</label>
-            <input type="password" value={pass} onChange={e => setPass(e.target.value)} placeholder="••••••••" className={inputClass} />
+          <div style={{ marginBottom: 24, textAlign: 'left' }}>
+            <label style={{ display: 'block', fontSize: 12, fontWeight: 500, color: '#94a3b8', marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 }}>Password</label>
+            <input type="password" value={pass} onChange={e => setPass(e.target.value)} placeholder="••••••••" style={inputStyle}
+              onFocus={e => e.currentTarget.style.borderColor = 'rgba(139,92,246,.5)'} onBlur={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,.08)'} />
           </div>
-          <button type="submit" className="btn-primary w-full justify-center py-3.5 mt-2">
+          <button type="submit" className="btn-primary" style={{ width: '100%', padding: 14, fontSize: 15 }}>
             <Lock size={16} /> Sign In
           </button>
         </form>
-        <p className="text-center text-xs text-slate-600 mt-6">Default: admin / k11admin</p>
       </div>
     </div>
   )

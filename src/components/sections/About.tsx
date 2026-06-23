@@ -1,20 +1,20 @@
 import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import { Eye, Lightbulb, Cpu, Zap } from 'lucide-react'
+import { Gem, Rocket, Shield, Sparkles } from 'lucide-react'
 import SectionHeading from '@/components/ui/SectionHeading'
 
 const STATS = [
-  { num: 150, suffix: '+', label: 'Projects Completed' },
+  { num: 150, suffix: '+', label: 'Projects Delivered' },
   { num: 120, suffix: '+', label: 'Happy Clients' },
   { num: 6, suffix: '+', label: 'Years Experience' },
   { num: 30, suffix: '+', label: 'Technologies' },
 ]
 
 const PILLARS = [
-  { icon: Eye, title: 'Vision', desc: 'We see the future of digital and build for it today.', color: '#8b5cf6' },
-  { icon: Lightbulb, title: 'Innovation', desc: 'Pushing boundaries with cutting-edge technology solutions.', color: '#d946ef' },
-  { icon: Cpu, title: 'Technology', desc: 'Mastering the latest frameworks and development tools.', color: '#06b6d4' },
-  { icon: Zap, title: 'Creativity', desc: 'Designing unique experiences that captivate and inspire.', color: '#f59e0b' },
+  { icon: Gem, title: 'Premium Quality', desc: 'Every project is crafted with pixel-perfect attention to detail and world-class design standards.', color: '#8b5cf6' },
+  { icon: Rocket, title: 'Fast Delivery', desc: 'We ship projects on time without compromising quality — speed and excellence go hand in hand.', color: '#d946ef' },
+  { icon: Shield, title: 'Reliable Support', desc: 'Dedicated post-launch support, maintenance, and updates to keep your business running smoothly.', color: '#06b6d4' },
+  { icon: Sparkles, title: 'Innovation First', desc: 'We use the latest AI, automation, and design trends to give your business a competitive edge.', color: '#f59e0b' },
 ]
 
 function Counter({ target, suffix }: { target: number; suffix: string }) {
@@ -46,6 +46,24 @@ export default function About() {
     <section id="about" style={{ padding: '112px 0' }}>
       <div className="section-container">
         <SectionHeading label="Who We Are" title="About K11 Solutions" subtitle="We transform ideas into powerful digital products that define the future." />
+
+        {/* About paragraph */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="cosmic-card"
+          style={{ padding: 32, marginBottom: 64, textAlign: 'center', maxWidth: 800, marginLeft: 'auto', marginRight: 'auto' }}
+        >
+          <p style={{ color: '#cbd5e1', fontSize: 17, lineHeight: 1.8, fontStyle: 'italic' }}>
+            K11 Solutions is a futuristic digital agency specializing in web development, AI-powered automation, and digital marketing.
+            Founded with a vision to empower businesses of all sizes, we build everything from stunning wedding invitation websites to
+            intelligent WhatsApp bots and full-scale e-commerce platforms. Our team combines creativity with cutting-edge technology
+            to deliver solutions that don't just look beautiful — they drive real growth. With 150+ projects delivered and clients across
+            India and beyond, we're not just building websites — we're building digital universes for businesses ready to dominate online.
+          </p>
+        </motion.div>
 
         <div className="grid-4" style={{ marginBottom: 80 }}>
           {PILLARS.map((p, i) => (

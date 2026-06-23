@@ -6,7 +6,8 @@ import Home from '@/pages/Home'
 import ServicesPage from '@/pages/ServicesPage'
 import AboutPage from '@/pages/AboutPage'
 import WorkPage from '@/pages/WorkPage'
-import ProcessPage from '@/pages/ProcessPage'
+import ReviewsPage from '@/pages/ReviewsPage'
+import BlogPage from '@/pages/BlogPage'
 import ContactPage from '@/pages/ContactPage'
 import NotFound from '@/pages/NotFound'
 import Admin from '@/pages/Admin'
@@ -33,7 +34,8 @@ export default function App() {
         <Route path="/services" element={<Layout><ServicesPage /></Layout>} />
         <Route path="/about" element={<Layout><AboutPage /></Layout>} />
         <Route path="/work" element={<Layout><WorkPage /></Layout>} />
-        <Route path="/process" element={<Layout><ProcessPage /></Layout>} />
+        <Route path="/reviews" element={<Layout><ReviewsPage /></Layout>} />
+        <Route path="/blog" element={<Layout><BlogPage /></Layout>} />
         <Route path="/contact" element={<Layout><ContactPage /></Layout>} />
         <Route path="*" element={<Layout><NotFound /></Layout>} />
       </Routes>
