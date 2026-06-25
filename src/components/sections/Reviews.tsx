@@ -8,13 +8,7 @@ interface Review {
   id: string; name: string; role: string; text: string; rating: number; date: string
 }
 
-const DEFAULT_REVIEWS: Review[] = [
-  { id: '1', name: 'Arjun Mehta', role: 'CEO, TechVentures', text: 'K11 Solutions transformed our entire digital presence. The website they built is not just beautiful — it converts. Our leads increased 300% in 3 months.', rating: 5, date: '2025-01-15' },
-  { id: '2', name: 'Priya Sharma', role: 'Founder, StyleHub', text: 'The e-commerce platform they built is incredible. Smooth checkout, stunning design, and our sales doubled. Best decision we made for our business.', rating: 5, date: '2025-02-20' },
-  { id: '3', name: 'Rohit Kapoor', role: 'CTO, DataFlow', text: 'Their WhatsApp AI bot handles hundreds of customer queries daily. Our support team workload dropped by 60%. Absolutely game-changing technology.', rating: 5, date: '2025-03-10' },
-  { id: '4', name: 'Neha Gupta', role: 'Bride, Wedding 2025', text: 'Our digital wedding invitation was stunning! Guests loved it — the RSVP feature, photo gallery, and countdown timer made everything so easy and elegant.', rating: 5, date: '2025-04-05' },
-  { id: '5', name: 'Dr. Vikram Singh', role: 'Dentist, SmileCare Clinic', text: 'The appointment booking website they built streamlined our entire patient flow. Online bookings increased 5x and no-shows dropped dramatically.', rating: 5, date: '2025-05-12' },
-]
+const DEFAULT_REVIEWS: Review[] = []
 
 export default function Reviews() {
   const [reviews, setReviews] = useState<Review[]>([])
@@ -52,15 +46,13 @@ export default function Reviews() {
     fontFamily: 'Inter, sans-serif', transition: 'border-color .3s',
   }
 
-  if (!t) return null
-
   return (
     <section style={{ padding: '112px 0' }}>
       <div className="section-container" style={{ maxWidth: 896, marginLeft: 'auto', marginRight: 'auto' }}>
         <SectionHeading label="Reviews" title="What Our Clients Say" subtitle="Real feedback from businesses and individuals we've helped grow." />
 
-        {/* Review carousel */}
-        <div style={{ marginBottom: 80 }}>
+        {/* Review carousel — only show if reviews exist */}
+        {t && <div style={{ marginBottom: 80 }}>
           <AnimatePresence mode="wait">
             <motion.div key={current} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.4 }}
               className="cosmic-card" style={{ padding: 48, textAlign: 'center' }}>
@@ -91,7 +83,7 @@ export default function Reviews() {
               <ChevronRight size={18} />
             </button>
           </div>
-        </div>
+        </div>}
 
         {/* Write a review form */}
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
